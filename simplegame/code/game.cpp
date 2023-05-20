@@ -4,8 +4,10 @@ Game::Game()
 	: m_Window{nullptr}
 	, m_Event{}
 	, m_VideoMode{}
+    , m_Enemy{}
 {
     InitWindow();
+    InitEnemies();
 }
 
 Game::~Game()
@@ -49,12 +51,19 @@ void Game::Render()
     m_Window->clear(sf::Color::Red);    // clear old frame
 
     // Draw game objects here
+    m_Window->draw(m_Enemy);
 
     m_Window->display();
 }
 
-void Game::InitVariables()
+void Game::InitEnemies()
 {
+    m_Enemy.setPosition(sf::Vector2f(10.0f, 10.0f));
+    m_Enemy.setSize(sf::Vector2f(100.0f, 100.0f));
+    m_Enemy.setScale(sf::Vector2f(0.5f, 0.5f));
+    m_Enemy.setFillColor(sf::Color::Cyan);
+    m_Enemy.setOutlineColor(sf::Color::Green);
+    m_Enemy.setOutlineThickness(1.0f);
 }
 
 void Game::InitWindow()
@@ -66,4 +75,6 @@ void Game::InitWindow()
 		m_VideoMode,
 		"My first game",
 		sf::Style::Titlebar | sf::Style::Close };
+
+    m_Window->setFramerateLimit(60);
 }

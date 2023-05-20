@@ -1,5 +1,7 @@
 #include "game.h"
 
+#include <iostream>
+
 Game::Game()
 	: m_Window{nullptr}
 	, m_Event{}
@@ -44,6 +46,13 @@ void Game::PollEvents()
 void Game::Update()
 {
     PollEvents();
+
+    // print mouse position relative to window
+    std::cout << "Mouse pos: ("
+        << sf::Mouse::getPosition(*m_Window).x
+        << ", "
+        << sf::Mouse::getPosition(*m_Window).y
+        << ")\n";
 }
 
 void Game::Render()
